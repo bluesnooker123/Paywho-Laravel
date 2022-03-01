@@ -22,7 +22,7 @@ class AuthController extends Controller
             $users = User::all();
             return view('dashboard', ["users" => $users]);
         }
-        return view('auth.login');
+        return view('Auth.login');
     }  
       
     /**
@@ -32,7 +32,7 @@ class AuthController extends Controller
      */
     public function registration()
     {
-        return view('auth.registration');
+        return view('Auth.registration');
     }
       
     /**
