@@ -20,9 +20,9 @@ use App\Http\Controllers\Auth\AuthController;
 Route::get('/', [AuthController::class, 'index']); 
 
 Route::get('login', [AuthController::class, 'index'])->name('login');
-Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
+Route::post('postLogin', [AuthController::class, 'postLogin'])->name('login.post'); 
 Route::get('registration', [AuthController::class, 'registration'])->name('register');
-Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post'); 
+Route::post('postRegistration', [AuthController::class, 'postRegistration'])->name('register.post'); 
 Route::post('fetch_user', [AuthController::class, 'fetch_user'])->name('fetch_user'); 
 Route::get('dashboard', [AuthController::class, 'dashboard']); 
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
