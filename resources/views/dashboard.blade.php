@@ -31,7 +31,7 @@
                             @foreach($users as $key => $user)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $user->name }}</td>
+                                    <td>{{ base64_decode($user->name) }}</td>
                                     <td>Click View</td>
                                     <td>Click View</td>
                                     <td class="p-1" style="text-align: center;"><button class="form-control btn btn-primary w-75" onclick="viewUser('{{ $user->name }}')">View</button></td>

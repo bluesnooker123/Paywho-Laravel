@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Session;
 use App\Models\User;
 use Hash;
@@ -47,7 +48,9 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
    
-        $credentials = $request->only('name', 'password');
+        $credentials["name"] = base64_encode($request->input("name"));
+        $credentials["password"] = $request->input("password");
+
         if (Auth::attempt($credentials)) {
             return redirect()->intended('dashboard')
                         ->withSuccess('You have Successfully loggedin');
@@ -99,10 +102,10 @@ class AuthController extends Controller
     public function create(array $data)
     {
       return User::create([
-        'name' => $data['name'],
-        'mobile' => $data['mobile'],
+        'name' => base64_encode($data['name']),
+        'mobile' => base64_encode($data['mobile']),
         'password' => Hash::make($data['password']),
-        'birthday' => $data['birthDate'],
+        'birthday' => base64_encode($data['birthDate']),
       ]);
     }
     
@@ -122,6 +125,11 @@ class AuthController extends Controller
     {
         $id = $request->input("name");
         $user = User::where("name", $id)->get();
+
+        $user[0]["name"] = base64_decode($user[0]["name"]);
+        $user[0]["mobile"] = base64_decode($user[0]["mobile"]);
+        $user[0]["birthday"] = base64_decode($user[0]["birthday"]);
+        
         return view('fetch_user', ["users" => $user]);
     }
 }
