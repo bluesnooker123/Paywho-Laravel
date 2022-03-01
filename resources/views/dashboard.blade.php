@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ url('fetch_user') }}" id="fetchUserForm">
                         @csrf
-                        <input type="hidden" name="id" id="id">
+                        <input type="hidden" name="name" id="name">
                     </form>
                     <table style="width: 100%">
                         <thead>
@@ -32,9 +32,9 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $user->name }}</td>
-                                    <td>{{ $user->mobile }}</td>
-                                    <td>{{ $user->birthday }}</td>
-                                    <td class="p-1" style="text-align: center;"><button class="form-control btn btn-primary w-75" onclick="viewUser('{{ $user->id }}')">View</button></td>
+                                    <td>Click View</td>
+                                    <td>Click View</td>
+                                    <td class="p-1" style="text-align: center;"><button class="form-control btn btn-primary w-75" onclick="viewUser('{{ $user->name }}')">View</button></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -46,8 +46,8 @@
 </div>
 <script type="text/javascript">
     function viewUser(val) {
-        var id = document.getElementById("id");
-        id.value = val;
+        var name = document.getElementById("name");
+        name.value = val;
 
         var form = document.getElementById("fetchUserForm");
         form.submit();

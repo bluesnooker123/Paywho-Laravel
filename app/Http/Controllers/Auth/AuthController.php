@@ -120,8 +120,8 @@ class AuthController extends Controller
 
     public function fetch_user(Request $request)
     {
-        $id = $request->input("id");
-        $user = User::where("id", $id)->get();
+        $id = $request->input("name");
+        $user = User::where("name", $id)->get();
         return view('fetch_user', ["users" => $user]);
     }
 }
