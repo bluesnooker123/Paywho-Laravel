@@ -22,11 +22,11 @@
                           </div>
   
                           <div class="form-group row">
-                              <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                              <label for="mobile" class="col-md-4 col-form-label text-md-right">Mobile</label>
                               <div class="col-md-6">
-                                  <input type="text" id="email_address" class="form-control" name="email" required autofocus>
-                                  @if ($errors->has('email'))
-                                      <span class="text-danger">{{ $errors->first('email') }}</span>
+                                  <input type="text" id="mobile" class="form-control" name="mobile" required autofocus>
+                                  @if ($errors->has('mobile'))
+                                      <span class="text-danger">{{ $errors->first('mobile') }}</span>
                                   @endif
                               </div>
                           </div>
@@ -40,17 +40,17 @@
                                   @endif
                               </div>
                           </div>
-  
+
                           <div class="form-group row">
-                              <div class="col-md-6 offset-md-4">
-                                  <div class="checkbox">
-                                      <label>
-                                          <input type="checkbox" name="remember"> Remember Me
-                                      </label>
-                                  </div>
+                              <label for="birthDate" class="col-md-4 col-form-label text-md-right">Date of birth</label>
+                              <div class="col-md-6">
+                                  <input type="date" id="birthDate" class="form-control" name="birthDate" required>
+                                  @if ($errors->has('birthDate'))
+                                      <span class="text-danger">{{ $errors->first('birthDate') }}</span>
+                                  @endif
                               </div>
                           </div>
-  
+    
                           <div class="col-md-6 offset-md-4">
                               <button type="submit" class="btn btn-primary">
                                   Register

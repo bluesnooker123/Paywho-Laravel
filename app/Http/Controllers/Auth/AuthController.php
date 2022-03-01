@@ -18,6 +18,10 @@ class AuthController extends Controller
      */
     public function index()
     {
+        if(Auth::check()){
+            $users = User::all();
+            return view('dashboard', ["users" => $users]);
+        }
         return view('auth.login');
     }  
       
@@ -39,11 +43,11 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+            'name' => 'required',
+            'password' => 'required|min:6',
         ]);
    
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('name', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('dashboard')
                         ->withSuccess('You have Successfully loggedin');
@@ -61,8 +65,9 @@ class AuthController extends Controller
     {  
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'mobile' => 'required|unique:users',
             'password' => 'required|min:6',
+            'birthDate' => 'required',
         ]);
            
         $data = $request->all();
@@ -95,8 +100,9 @@ class AuthController extends Controller
     {
       return User::create([
         'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => Hash::make($data['password'])
+        'mobile' => $data['mobile'],
+        'password' => Hash::make($data['password']),
+        'birthday' => $data['birthDate'],
       ]);
     }
     
@@ -114,8 +120,8 @@ class AuthController extends Controller
 
     public function fetch_user(Request $request)
     {
-        $email = $request->input("email");
-        $user = User::where("email", $email)->get();
-        return view('dashboard', ["users" => $user]);
+        $id = $request->input("id");
+        $user = User::where("id", $id)->get();
+        return view('fetch_user', ["users" => $user]);
     }
 }
